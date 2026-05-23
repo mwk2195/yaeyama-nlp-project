@@ -1,0 +1,7 @@
+/venv/
+/final_hatoma_normalizer/
+/byt5-hatoma-normalizer/
+/Temp/
+__pycache__/
+*.py[cod]
+.DS_Store
