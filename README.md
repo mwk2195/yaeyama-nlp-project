@@ -27,13 +27,24 @@ For example, when OpenAI's `cl100k_base` tokenizer encounters the word `ピト�
 
 ### Phase 1: The Normalizer (ByT5)
 To correct the orthographic noise, I fine-tuned a Google **ByT5** (Byte-level Text-to-Text Transfer Transformer) model. Operating directly on raw UTF-8 bytes rather than sub-word tokens allows the model to act as a highly sensitive spell-checker, identifying missing dakuten (voicing marks) and applying complex vowel shifts without being constrained by an out-of-distribution vocabulary. The model was trained on the NINJAL Hatoma dialect dictionary.
-Link to trained model: https://drive.google.com/drive/folders/13V0_TZoRY1b6AaTv6X2WA6_1qkNPITR5?usp=drive_link
+
+### Related files: 
+
+1. scraper.py to collect the data.
+2. corrupt_data.py to augment the data with artificial noise.
+3. train_normalizer.py to train the model.
+4. Link to trained model: https://drive.google.com/drive/folders/13V0_TZoRY1b6AaTv6X2WA6_1qkNPITR5?usp=drive_link
 
 ### Phase 2: The Tokenizer (Byte-Level BPE)
 To establish an efficient computational foundation for the language, I trained a custom **Byte-Level BPE Tokenizer**. 
 * **Vocabulary Cap:** Intentionally bottlenecked to `4,000` tokens to force the algorithm to reverse-engineer Yaeyama morphology rather than rote-memorizing dictionary roots.
 * **Byte Fallback:** Ensures that 100% of the character data is preserved for downstream models, entirely avoiding the `<unk>` token data-loss trap.
 
+### Related files: 
+
+1. train_tokenizer.py to train the tokenizer
+2. Data/hatoma_seed_corpus.csv (after running scraper.py or downloading it from this repo)
+3. The trained tokenizer in the Tokenizer folder
 ---
 
 ## 4. Evaluation Methodology
