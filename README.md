@@ -27,6 +27,7 @@ For example, when OpenAI's `cl100k_base` tokenizer encounters the word `ピト�
 
 ### Phase 1: The Normalizer (ByT5)
 To correct the orthographic noise, I fine-tuned a Google **ByT5** (Byte-level Text-to-Text Transfer Transformer) model. Operating directly on raw UTF-8 bytes rather than sub-word tokens allows the model to act as a highly sensitive spell-checker, identifying missing dakuten (voicing marks) and applying complex vowel shifts without being constrained by an out-of-distribution vocabulary. The model was trained on the NINJAL Hatoma dialect dictionary.
+Link to trained model: https://drive.google.com/drive/folders/13V0_TZoRY1b6AaTv6X2WA6_1qkNPITR5?usp=drive_link
 
 ### Phase 2: The Tokenizer (Byte-Level BPE)
 To establish an efficient computational foundation for the language, I trained a custom **Byte-Level BPE Tokenizer**. 
